@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: db-e410
+    image: zotowa/e410-db:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypass
+      - POSTGRES_DB=mydb
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+  web:
+    container_name: django-e410
+    image: zotowa/e410-web:latest
+    restart: always
+    ports: 
+      - 8000:8000
+    depends_on:
+      - db
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+  nginx:
+    image: zotowa/e410-nginx:latest
+    container_name: nginx-e410
+    ports:
+      - 80:80
+
+volumes:
+  pgdata:
