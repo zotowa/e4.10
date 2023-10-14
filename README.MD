@@ -9,7 +9,7 @@
 
 Так как БД не переносилась в образы,
 необходимо зайти в контейнер django-e410:
-docker exec -it django-e410 /bin/sh
+#docker exec -it django-e410 /bin/sh
 
 и создать пользователя командой:
 python manage.py createsuperuser
