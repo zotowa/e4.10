@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     container_name: db-e410
-    image: zotowa/e410-db:latest
+    image: zotowa/e410-postgre:latest
     restart: always
     environment:
       - POSTGRES_USER=myuser
